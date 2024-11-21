@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  money-manager-api:
+    image: ghcr.io/pokedex-gamba/money-manager-api:latest
+    ports:
+      - "8893:80"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/money-manager
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+    depends_on:
+      - db
+    volumes:
+      - ./decoding_key:/decoding_key
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  db:
+    image: mysql:8.0
+    build: ./database
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: money-manager
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

@@ -41,7 +41,7 @@ public class MoneyManagerController {
     }
 
     @GetMapping("/moneyManager/modifyBalance/{amount}")
-    public void addMoney(@RequestHeader(HttpHeaders.AUTHORIZATION) String userToken, @PathVariable int amount) {
+    public ResponseEntity<?> addMoney(@RequestHeader(HttpHeaders.AUTHORIZATION) String userToken, @PathVariable int amount) {
         String userId = getUserIdFromToken(userToken);
         UserWallet userWallet = moneyManagerService.findUsersWallet(userId);
         if(userWallet == null) {
@@ -52,6 +52,7 @@ public class MoneyManagerController {
             userWallet.setBalance(value);
             moneyManagerService.saveMoney(userWallet);
         }
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     private String getUserIdFromToken(String authHeader) {

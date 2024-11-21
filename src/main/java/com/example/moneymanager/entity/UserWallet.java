@@ -2,8 +2,6 @@ package com.example.moneymanager.entity;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
-
 @Entity
 @Table(name = "user_wallet")
 public class UserWallet {
