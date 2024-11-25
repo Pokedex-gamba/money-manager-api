@@ -27,7 +27,7 @@ public class MoneyManagerController {
     private KeyLoaderService keyLoaderService;
 
 
-    @GetMapping("moneyManager/findUserWallet")
+    @GetMapping("/findUserWallet")
     public ResponseEntity<?> findUserWallet(@RequestHeader(HttpHeaders.AUTHORIZATION) String userToken) {
         String userId = getUserIdFromToken(userToken);
         UserWallet userWallet = moneyManagerService.findUsersWallet(userId);
@@ -40,7 +40,7 @@ public class MoneyManagerController {
         }
     }
 
-    @GetMapping("/moneyManager/modifyBalance/{amount}")
+    @GetMapping("/modifyBalance/{amount}")
     public ResponseEntity<?> addMoney(@RequestHeader(HttpHeaders.AUTHORIZATION) String userToken, @PathVariable int amount) {
         String userId = getUserIdFromToken(userToken);
         UserWallet userWallet = moneyManagerService.findUsersWallet(userId);
