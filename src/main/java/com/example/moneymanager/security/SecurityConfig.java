@@ -22,6 +22,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/findUserWallet").hasAuthority("svc::money_manager::route::/findUserWallet")
                         .requestMatchers("/modifyBalance/**").hasAuthority("svc::money_manager::route::/modifyBalance")
+                        .requestMatchers("/docs","/v3/api-docs").permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {
