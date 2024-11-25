@@ -51,6 +51,11 @@ public class MoneyManagerController {
         }
     }
 
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200")
+            }
+    )
     @GetMapping("/modifyBalance/{amount}")
     public ResponseEntity<?> addMoney(@RequestHeader(HttpHeaders.AUTHORIZATION) String userToken, @PathVariable int amount) {
         String userId = getUserIdFromToken(userToken);
