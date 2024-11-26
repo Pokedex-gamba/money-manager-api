@@ -35,7 +35,10 @@ public class MoneyManagerController {
             value = {
                     @ApiResponse(responseCode = "200",
                             content = @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = UserWallet.class)))
+                                    schema = @Schema(implementation = UserWallet.class))),
+                    @ApiResponse(responseCode = "404",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(example = "{\"message\" : \"No user wallet found\"}")))
             }
     )
     @GetMapping("/findUserWallet")
