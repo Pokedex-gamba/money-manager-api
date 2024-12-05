@@ -74,6 +74,17 @@ public class MoneyManagerController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200")
+            }
+    )
+    @GetMapping("/addMoneyToAll")
+    public ResponseEntity<?> addMoneyToAll(@RequestParam(name = "amount") int amount) {
+        moneyManagerService.addMoneyToAll(amount);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
     private String getUserIdFromToken(String authHeader) {
         String token = authHeader.replace("Bearer", "").trim();
 
