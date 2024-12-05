@@ -19,8 +19,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.security.PublicKey;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -46,9 +44,9 @@ public class MoneyManagerController {
         String userId = getUserIdFromToken(userToken);
         UserWallet userWallet = moneyManagerService.findUsersWallet(userId);
         if (userWallet == null) {
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "No user wallet found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            UserWallet newUserWallet = new UserWallet(userId, 0);
+            moneyManagerService.saveMoney(newUserWallet);
+            return ResponseEntity.ok(newUserWallet);
         } else {
             return ResponseEntity.ok(userWallet);
         }
